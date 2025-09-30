@@ -58,16 +58,24 @@ streamlit run app.py
 •	Upload your dataset or enter text manually.
 •	Customize the few-shot prompt (optional).
 •	Click buttons to:
-o	Process Model: Convert uploaded data into internal DataFrame.
-o	Run Evaluation: Evaluate model performance using selected metrics.
-o	Process and Evaluate: Combine processing and evaluation in a single step.
+  o	Process Model: Convert uploaded data into internal DataFrame.
+  o	Run Evaluation: Evaluate model performance using selected metrics.
+  o	Process and Evaluate: Combine processing and evaluation in a single step.
+  o	Generation Feedback: Generate feedback for text in dataset.
 
 5.	Visualization
 
 •	Confusion matrix generated using Seaborn for classification tasks.
+
 •	Results displayed in tables and interactive dashboards.
 
+
 **Streamlit Output::**
+
+*1. Model Process and Evaluation Output:*
+
 <img src="modelprocess_evaluation_output.png" alt="Model Process and Evaluation Output" width="600"><br>
+
+*2. Feedback Generation Output:*
 
 <img src="feedback_generation_output.png" alt="Feedback Generation Output" width="600"><br>

@@ -17,15 +17,15 @@ Project name: AAIE – LLM Prototyping and Training
 
 The experiment was conducted with a set of test prompts and student-like submissions, focusing on academic integrity evaluation and supportive academic assessment.
 
-1. **Methodology:**
+2. **Methodology:**
 
 - Model Used: Gemini 1.5 Flash (via Google AI Studio).
 - Domain Focus: Academic Integrity, Education, and Environmental Science.
 - Evaluation Strategy: Each prompt was submitted to the model. The generated outputs were analyzed along two dimensions:
-1) AI Detection Quality: clarity of evaluation, reasoning, and recommendations for further investigation.
-1) Feedback Quality: clarity, rubric alignment, and actionability of suggestions.
+a) AI Detection Quality: clarity of evaluation, reasoning, and recommendations for further investigation.
+b) Feedback Quality: clarity, rubric alignment, and actionability of suggestions.
 
-   1. AI Detection Criteria
+   a. AI Detection Criteria
 
 - The model's classifications (Human / AI / Hybrid) were checked against markers such as:
 - Repetition
@@ -38,7 +38,7 @@ The experiment was conducted with a set of test prompts and student-like submiss
 - Pronouns & Contextual Appropriateness
 - Output Assessment: Each prediction was marked Correct or Incorrect and given a short explanation with confidence score in percentage.
 
-  1. Feedback Evaluation Criteria:
+  b. Feedback Evaluation Criteria:
 
 - Feedback quality was scored on a 1–5 scale using six dimensions:
 - Correctness – accurate, helpful
@@ -49,22 +49,16 @@ The experiment was conducted with a set of test prompts and student-like submiss
 - Emotion – empathetic, sensitive
 - Output Assessment: Each feedback was scored across criteria, averaged, and explained briefly.
 
-1. **Implementation**
+3. **Implementation**
 
-1. *Environment Set-up:*
+a. *Environment Set-up:*
 
 - Selected Model: Gemini 1.5 flash
 
 - Create Jsonl dataset format: the five designated training datasets
 
 
-  1. Gemini 1.5 flash model Set-up:
-
-genai.configure(api\_key="create_api_key")  
-
-MODEL = "gemini-1.5-flash"
-
-1. *Role-Based Prompting:*
+b. *Role-Based Prompting:*
 
 1) **Role 1: Academic Integrity Evaluator (AI Detection):**
 - Classify label the submission whether it is Human, AI, or Hybrid
@@ -72,96 +66,164 @@ MODEL = "gemini-1.5-flash"
 - Explanation: provide full detail such as what student have and what they need to improve
 - Flags: summary the key points (main keys)
 
-1) **Role 2: Supportive Academic Assessor (Feedback Generation):**
+2) **Role 2: Supportive Academic Assessor (Feedback Generation):**
 - Score submission against 6 criteria (Correctness, Clarity, Tone, Actionability, Coherence, Emotion).
 - Compute Overall Rating (average): show the rating from 1 to 5, such as excellent, good, average, need improvement, and poor
 - Provide feedback text and reasoning for each score.
 
-1. *Input Submission*
-- Create Jsonl file for fine tuning with selected model (Gemini 1.5 flash model)
+c. *Input Submission*
+- Five training datasets
 
-1. **The Result**
+4. **The Result**
 
    1. *AI Detection Output:*
 
       **AI Detection Output 1:**  
       
-      Evaluation Output:
-         Input structure:
-         - Text: "I studied hard and wrote this essay myself."
-         - Label: Human
-         - Prediction: Human
-         Output structure:
-         - **Result:** Correct
-         - **Criteria-based analysis:**
-         * **Repetition:** Low. The statement contains minimal repetition of words or phrases.
-         * **Lexical Diversity:** Low. The vocabulary is simple and limited, reflecting a concise statement rather than a full essay. This is expected for a self-declaration, not a measure
-         of overall writing skill.
-         * **Sentence Structure Diversity:** Low. The statement is a single simple sentence. Again, this is expected given the context.
-         * **Grammar：** High. Grammatically correct and well-formed.
-         * **Content Specificity:** Low.
-         The statement
-         is generic and lacks specific details about the essay's content or the study process.
-         * **Emotional Expressiveness:** Low. The statement is neutral and unemotional.
-         * **Coherence & Natural Transitions:** High. The statement is coherent and naturally expresses the intended meaning.
-         * **Pronouns：**
-         High.
-         The use of first-person pronouns ("I") is appropriate and contextually relevant.
-         * **Contextual Appropriateness:** High. The statement is entirely appropriate as a self-declaration of authorship.
-         - **Confidence_level:** 95%
-         **Reasoning for high confidence:** While the text is short and lacks the complexity typically associated with evaluating AI detection in longer texts, the claim's simplicity and lack of stylistic anomalies are consistent with a human-written self-declaration.
-         AI models often struggle with such short, simple, and straightforward statements, particularly when they lack
-         any sophisticated writing style which could be used to distinguish the writing as AI-generated.ersity.
+         Domain: Teaching
+         Assignment Prompt: Examine current research on early literacy development and evaluate evidence-based approaches for supporting pre-reading skills in diverse learners aged 3 to 6 years.
 
-      **AI Detection Output 2:**  
+         --- Submission 1 ---
+         Label: AI
+         Text (preview): Current research on early literacy development highlights the foundational role of phonological awareness, vocabulary acquisition, and print knowledge...
 
-      Evaluation Output:
-         - **Text:** "Artificial intelligence models revolutionize education by providing adaptive learning."
-         - **Label:** AI
-         - **Prediction:** AI
-         - **Result:** Correct
-         **Criteria-based analysis:**
-         * **Repetition:** Low. No words or phrases are repeated
-         * **Lexical Diversity:** Low to Moderate. The vocabulary unnecessarily. is relatively simple and focused on the core concept. While not diverse, it is sufficient for conveying the message.
-         * **Sentence Structure Diversity:** Low. The sentence is simple and straightforward, lacking structural variation.
-         * **Grammar:** Excellent. The grammar is correct and the sentence is well-formed.
-         * **Content Specificity:** High. The statement is specific to the impact of AI on education. It doesn't offer generalizations or tangents.
-         * **Emotional Expressiveness:** Low. The statement is neutral and factual, devoid of emotional language.
-         * **Coherence & Natural Transitions:** High. The sentence is coherent and logically structured. The connection between AI models and adaptive learning is clear.
-         * **Pronouns:** Absent. No pronouns are used, which is typical of concise, factual statements.
-         * **Contextual Appropriateness:** High. The statement is appropriate within the context of discussing the role of AI in education.
-         **Confidence_level:** 95%
-         **Reasoning for Confidence Level:** While the lexicall
-         diversity and sentence structure diversity are relatively low,
-         these are not uncommon in concise, factual statements, especially those
-         expressing a single, clear idea. The high content specificity, grammatical correctness, and overall coherence strongly suggest the text was generated with a clear purpose and struct ure, consistent with a well-trained AI model focusing on a specific aspect of AI in education. The lack of emotional expressiveness further points towards an AI origin.
+         --- Submission 2 ---
+         Label: AI
+         Text (preview): Early literacy development involves acquiring key skills such as phonological awareness, vocabulary, and an understanding of print, which typically em...
 
-      **AI Detection Output 3:**  
-      Evaluation Output:
-         Input structure:
-         - Text: "I asked ChatGPT for help with the outline, then expanded it with my own analysis."
-         - Label: AI
-         - Prediction: AI
-         Output structure:
-         - Result: Correct
-         - Criteria-based analysis:
-         * **Repetition:** Low.
-         * **Lexical Diversity:** Moderate.
-         The vocabulary is relatively simple but sufficient for the statement's purpose. More sophisticated vocabulary might be expected in a fully developed academic paper,
-         * **Sentence Structure Diversity:** Low. The statement consists of only two simple sentences. Lack of structural diversity is not unusual in short statements, but could be a concer n if this pattern persisted throughout a larger work.
-         * **Grammar:** Excellent. Grammatically correct and clearly written.
-         * **Content Specificity:** Moderate. The statement is specific in identifying the use of AI (ChaGPT) but lacks detail regarding the nature of the outline or analysis. More detail would improve the specificity.
-         * **Emotional Expressiveness:** Low. The statement is neutral and devoid of emotional expression. This is appropriate for an
-         academic context.
-         * **Coherence & Natural Transitions:** Excellent. The two sentences flow logically and naturally, with a clear temporal connection ("then").
-         * **Pronouns:** Appropriate. The first-person pronoun "I" is used correctly.
-         * **Contextual Appropriateness:** High. The statement is contextually appropriate within the context of acknowledging AI assistance in academic work. The admission of AI use is itself contextually appropriate.
-         
-         - Confidence_level: 95%
-         
-         Reasoning: The statement explicitly admits the use of ChatGPT. While the analysis portion is claimed as the student's own work, the reliance on AI for the outline is a significant indi cator. generation, but the confession is the primary basis for the high confidence level in the AI prediction. The lack of significant lexical or structural diversity is more a characteristic of the brevity of the statement than a strong indicator of AI authorship.
+         --- Submission 3 ---
+         Label: Human
+         Text (preview): Early literacy development is such a critical phase in a child's life, especially between the ages of 3 and 6, where so much foundational learning tak...
 
-   1. *Feedback AI Generation Output:* 
+         --- Submission 4 ---
+         Label: Human
+         Text (preview): Learning to read doesn't just start when a child enters school—early literacy development begins much earlier, especially between the ages of 3 and 6....
+
+         --- Submission 5 ---
+         Label: Hybrid
+         Text (preview): Early literacy development is a critical phase for children aged between 3 and 6. During this foundational period, children typically begin developing...
+
+         --- Submission 6 ---
+         Label: Hybrid
+         Text (preview): Literacy development in children does not need to begin with school age. Indeed, key skills such as phonological awareness, vocabulary, and an underst...
+
+
+         === Processing Dataset: dataset/it 1.json ===
+         Domain: Information Technology
+         Assignment Prompt: In a few sentences, examine the role of Artificial Intelligence in modern cybersecurity, providing examples of its applications and potential risks.
+
+         --- Submission 1 ---
+         Label: AI
+         Text (preview): Artificial Intelligence plays a pivotal role in modern cybersecurity by automating threat detection, enhancing incident response, and reducing false p...
+
+         --- Submission 2 ---
+         Label: AI
+         Text (preview): AI-based cybersecurity solutions such as behavioral analytics and automated intrusion detection systems have allowed organizations to proactively dete...
+
+         --- Submission 3 ---
+         Label: Human
+         Text (preview): Last year, my company faced a targeted phishing campaign. At the time, we were testing a new AI-based email filter. It actually flagged several emails...
+
+         --- Submission 4 ---
+         Label: Human
+         Text (preview): As a junior security analyst, I used to spend hours going through alerts manually. Once we integrated an AI-powered tool into our workflow, it cut our...
+
+         --- Submission 5 ---
+         Label: Hybrid
+         Text (preview): We used AI to monitor user activity across our cloud environment. While the algorithm caught some abnormal logins, it also raised false alarms that co...
+
+         --- Submission 6 ---
+         Label: Hybrid
+         Text (preview): We recently ran a red team-blue team exercise. Our AI tools were excellent at identifying command-and-control traffic, but when it came to lateral mov...
+
+
+         === Processing Dataset: dataset/accounting 1.json ===
+         Domain: Accounting
+         Assignment Prompt: Analyze the impact of blockchain technology on traditional accounting practices, including auditing and financial reporting.
+
+         --- Submission 1 ---
+         Label: AI
+         Text (preview): Blockchain technology, defined by its decentralization, immutability, and transparency, is transforming traditional accounting practices, particularly...
+
+         --- Submission 2 ---
+         Label: AI
+         Text (preview): Blockchain technology, defined by its decentralization, immutability, and transparency, is revolutionizing traditional accounting practices, particula...
+
+         --- Submission 3 ---
+         Label: Human
+         Text (preview): As a business student fascinated by tech, I see blockchain revolutionizing traditional accounting. Its decentralized, tamper-proof ledger could transf...
+
+         --- Submission 4 ---
+         Label: Human
+         Text (preview): As a business student fascinated by tech, I see blockchain reshaping accounting, auditing, and financial reporting, though it’s not without challenges...
+
+         --- Submission 5 ---
+         Label: Hybrid
+         Text (preview): Blockchain technology significantly reshapes traditional accounting practices, including auditing and financial reporting, by enhancing transparency, ...
+
+         --- Submission 6 ---
+         Label: Hybrid
+         Text (preview): Blockchain technology significantly transforms traditional accounting practices, enhancing efficiency, transparency, and security. Its decentralized, ...
+
+
+         === Processing Dataset: dataset/psychology 1.json ===
+         Domain: Psychology
+         Assignment Prompt: Critically evaluate the role of cognitive biases in human decision-making. Select at least three cognitive biases (e.g., confirmation bias, anchoring, availability heuristic) and explain how they influence decision-making in real-world scenarios (e.g., healthcare, law, relationships, consumer behavior). Discuss the psychological theories behind them and explore how awareness or mitigation strategies can improve judgment.
+
+         --- Submission 1 ---
+         Label: AI
+         Text (preview): Cognitive biases significantly influence human decision-making, often leading to systematic errors in judgment. For instance, confirmation bias leads ...
+
+         --- Submission 2 ---
+         Label: AI
+         Text (preview): Cognitive biases play a crucial role in shaping decision-making, often leading to irrational or suboptimal choices. Confirmation bias affects decision...
+
+         --- Submission 3 ---
+         Label: Human
+         Text (preview): Cognitive biases have a big influence on how we make decisions, often without us even realizing it. For instance, confirmation bias makes us focus on ...
+
+         --- Submission 4 ---
+         Label: Human
+         Text (preview): Cognitive biases shape how we make decisions by twisting our judgment in ways we're often unaware of. For example, confirmation bias makes us seek out...
+
+         --- Submission 5 ---
+         Label: Hybrid
+         Text (preview): Cognitive biases, such as confirmation bias, anchoring, and the availability heuristic, will be able to shape human decision-making by distorting perc...
+
+         --- Submission 6 ---
+         Label: Hybrid
+         Text (preview): Cognitive biases, such as confirmation bias (Nickerson, 1998), anchoring (Tversky & Kahneman, 1974), and the availability heuristic, affect decision-m...
+
+
+         === Processing Dataset: dataset/engineering 1.json ===
+         Domain: Manufacturing Engineering
+         Assignment Prompt: Describe how a manufacturing engineer sets up a basic production line for a new consumer product. Explain the steps taken from design to assembly, including equipment layout, efficiency considerations, and safety.
+
+         --- Submission 1 ---
+         Label: AI
+         Text (preview): To set up a basic production line for a new consumer product, a manufacturing engineer follows a structured, multi-phase process. It begins with desig...
+
+         --- Submission 2 ---
+         Label: AI
+         Text (preview): A manufacturing engineer sets up a production line through a step-by-step approach that begins with understanding the final product's design. This inc...
+
+         --- Submission 3 ---
+         Label: Human
+         Text (preview): When setting up a production line, a manufacturing engineer starts by looking at the product's design carefully. They figure out what parts are needed...
+
+         --- Submission 4 ---
+         Label: Human
+         Text (preview): To set up a new production line, a manufacturing engineer first learns about the product they are going to build. They look at drawings and talk with ...
+
+         --- Submission 5 ---
+         Label: Hybrid
+         Text (preview): The process of setting up a production line involves both technical planning and practical foresight. First, the manufacturing engineer reviews the pr...
+
+         --- Submission 6 ---
+         Label: Hybrid
+         Text (preview): Setting up a basic production line combines detailed technical design with real-world testing and adaptation. After the product design is reviewed, th...
+
+   2. *Feedback AI Generation Output:* 
 
       **Feedback Generation Output 1:**
       Evaluation Output:
